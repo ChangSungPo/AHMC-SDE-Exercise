@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # 3. Fire up Uvicorn directly targeting src.main:app because /app is the root!
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn src.app:app --host 0.0.0.0 --port ${PORT:-8000}"]

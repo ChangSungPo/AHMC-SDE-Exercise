@@ -15,6 +15,6 @@ class ScriptSettings:
         self.openai_api_key = os.getenv("OPENAI_API_KEY", "")
         self.chroma_db_path = os.getenv("CHROMA_DB_PATH", "")
         self.embedding_model_name = os.getenv("EMBEDDING_MODEL_NAME", "")
-        self.chroma_collection_name = os.getenv("CHROMA_COLLECTION_NAME", "")
+        self.chroma_collection_name = os.getenv("CHROMA_COLLECTION_NAME", "medical_guidelines")
 
 settings = ScriptSettings()
