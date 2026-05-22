@@ -74,6 +74,7 @@ export const styles: { [key: string]: React.CSSProperties } = {
   splitLayout: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
+    gridTemplateRows: "1fr",
     gap: "1.5rem",
     alignItems: "stretch",
     flex: 1,         // Take up all available vertical space automatically
@@ -89,6 +90,7 @@ export const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: "column",
     gap: "1rem",
     height: "100%",  // Match the container dynamic height
+    minHeight: 0,
     boxSizing: "border-box",
   },
   panelTitle: {
@@ -190,6 +192,14 @@ export const styles: { [key: string]: React.CSSProperties } = {
     outline: "none",
     width: "100%",
   },
+  matrixViewer: {
+      flex: 1,
+      overflowY: "auto",
+      display: "flex",
+      flexDirection: "column",
+      gap: "1rem",
+      paddingRight: "0.25rem",
+    },  
   centerState: {
     textAlign: "center",
     padding: "4rem 2rem",

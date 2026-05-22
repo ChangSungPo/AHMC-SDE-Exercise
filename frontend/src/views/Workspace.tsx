@@ -125,9 +125,9 @@ export const Workspace: React.FC<WorkspaceProps> = ({
         </div>
 
         {/* Right Viewport */}
-        <div style={{ ...styles.panel, overflowY: "auto" }}>
+        <div style={{ ...styles.panel, overflowY: "auto"}}>
           <h3 style={styles.panelTitle}>Structured Structured Audit Matrix</h3>
-
+          {/* <div style={styles.matrixViewer}> */}
           {/* 1. Chief Complaint */}
           <div style={styles.fieldBlock}>
             <div style={styles.labelRow}>
@@ -396,7 +396,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
               )}
             </div>
           </div>
-
+          {/* </div> */}
         </div>
       </div>
     </div>
