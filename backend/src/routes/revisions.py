@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException, Path, status
 from typing import List
-from backend.src.services.revision_service import revision_service
-from backend.src.schemas.api_schemas import (
+from src.services.revision_service import revision_service
+from src.schemas.api_schemas import (
     AnalyzeCaseRequest,
     SaveRevisionRequest,
     UpdateCaseRequest,
     CaseSummaryResponse,
     CaseDetailResponse,
 )
-from backend.src.agents.schemas import FinalAssessmentSchema
+from src.agents.schemas import FinalAssessmentSchema
 
 router = APIRouter(prefix="/api/revisions", tags=["Cases revisions Controller"])
 

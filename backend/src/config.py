@@ -12,9 +12,7 @@ class Settings(BaseSettings):
     
     embedding_model_name: str = "text-embedding-3-small"
     chroma_db_path: str = "./vector_db"
-    chroma_collection_name: str = "mcg_diabetes_m130"
-    backend_host: str = "0.0.0.0"
-    backend_port: int = 8000
+    chroma_collection_name: str = "medical_guidelines"
     
     # App Config
     environment: str = "development"

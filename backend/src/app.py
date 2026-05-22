@@ -5,8 +5,8 @@ from fastapi.responses import JSONResponse
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.src.database import close_mongo_connection, connect_to_mongo
-from backend.src.routes.revisions import router as revisions_router
+from src.database import close_mongo_connection, connect_to_mongo
+from src.routes.revisions import router as revisions_router
 
 # CURRENT_FILE = Path(__file__).resolve()
 # SRC_ROOT = CURRENT_FILE.parent
@@ -62,4 +62,4 @@ async def root_health_check():
 if __name__ == "__main__":
     import uvicorn
     # Spin up development server on port 8000
-    uvicorn.run("backend.src.app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("src.app:app", host="0.0.0.0", port=8000, reload=True)

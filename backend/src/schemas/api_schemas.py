@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
-from backend.src.agents.schemas import FinalAssessmentSchema
+from src.agents.schemas import FinalAssessmentSchema
 
 class AnalyzeCaseRequest(BaseModel):
     raw_note: str = Field(

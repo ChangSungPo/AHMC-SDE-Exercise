@@ -1,3 +1,5 @@
+import os
+
 import chromadb
 from openai import OpenAI
 from ..config import settings
@@ -25,6 +27,26 @@ class HeadAgent:
         self.chroma_client = chromadb.PersistentClient(path=settings.chroma_db_path)
 
         self.openai_ef = embedding_functions.OpenAIEmbeddingFunction(api_key=settings.openai_api_key, model_name=settings.embedding_model_name)
+
+        chroma_mode = os.getenv("CHROMA_MODE", "persistent").lower()
+        print(chroma_mode)
+        if chroma_mode == "http":
+            # Cloud Production Route (Connects via Private/Public HTTP Networking)
+            host = os.getenv("CHROMA_HOST", "localhost")
+            port = int(os.getenv("CHROMA_PORT", "8000"))
+            ssl_enabled = os.getenv("CHROMA_SSL", "False").lower() in ("true", "1", "yes")
+            
+            print(f"[Head Agent] Routing to REMOTE ChromaDB cluster via HttpClient ({host}:{port}, SSL={ssl_enabled})")
+            self.chroma_client = chromadb.HttpClient(
+                host=host,
+                port=port,
+                ssl=ssl_enabled
+            )
+        else:
+            # Traditional Local Disk Storage Route
+            print(f"[Head Agent] Routing to LOCAL persistent storage path: {settings.chroma_db_path}")
+            self.chroma_client = chromadb.PersistentClient(path=settings.chroma_db_path)
+
 
         # Load the targeted persistent MCG vector store collection
         self.collection = self.chroma_client.get_collection(
