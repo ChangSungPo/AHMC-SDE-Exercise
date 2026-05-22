@@ -24,7 +24,6 @@ class HeadAgent:
         print("[Head Agent] Initializing centralized clinical intelligence framework...")
 
         self.openai_client = OpenAI(api_key=settings.openai_api_key)
-        self.chroma_client = chromadb.PersistentClient(path=settings.chroma_db_path)
 
         self.openai_ef = embedding_functions.OpenAIEmbeddingFunction(api_key=settings.openai_api_key, model_name=settings.embedding_model_name)
 

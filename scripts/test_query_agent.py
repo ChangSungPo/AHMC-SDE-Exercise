@@ -41,7 +41,7 @@ MOCK_PASSED_SNAPSHOT = PatientSnapshotSchema(
 )
 
 def run_query_agent_test():
-    print("=== [Test Startup] Testing QueryAgent with Local ChromaDB ===")
+    print("=== [Test Startup] Testing QueryAgent with ChromaDB ===")
     
     # 1. Initialize official clients using validated configs
     openai_client = OpenAI(api_key=settings.openai_api_key)

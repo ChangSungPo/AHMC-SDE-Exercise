@@ -66,8 +66,26 @@ def index_clinical_chunks_to_vector_db(documents):
         print("Please set it before running, or ChromaDB will fail to generate embeddings.")
     
     print(f"\n[Vector DB] Initializing persistent storage at: {settings.chroma_db_path}")
+    
+    
     # Initialize the persistent client (creates local files in your repo)
-    client = chromadb.PersistentClient(path=settings.chroma_db_path)
+    chroma_mode = os.getenv("CHROMA_MODE", "persistent").lower()
+    if chroma_mode == "http":
+        host = os.getenv("CHROMA_HOST", "localhost")
+        port = int(os.getenv("CHROMA_PORT", "8000"))
+        ssl_enabled = os.getenv("CHROMA_SSL", "False").lower() in ("true", "1", "yes")
+        
+        print(f"\n[Vector DB] Connecting to REMOTE ChromaDB instance via HttpClient ({host}:{port}, SSL={ssl_enabled})...")
+        client = chromadb.HttpClient(
+            host=host,
+            port=port,
+            ssl=ssl_enabled
+        )
+    else:
+        db_path = getattr(settings, "chroma_db_path", "./vector_db")
+        print(f"\n[Vector DB] Connecting to LOCAL persistent storage at: {db_path}")
+        client = chromadb.PersistentClient(path=db_path)
+    
     
     # Configure OpenAI Embedding Function (text-embedding-3-small is cheap and highly effective)
     openai_ef = embedding_functions.OpenAIEmbeddingFunction(
