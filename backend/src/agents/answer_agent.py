@@ -1,6 +1,6 @@
 from openai import OpenAI
 from typing import List, Dict, Any
-from agents.schemas import PatientSnapshotSchema, ClinicalAuditReportSchema, FinalAssessmentSchema
+from .schemas import PatientSnapshotSchema, ClinicalAuditReportSchema, FinalAssessmentSchema
 
 
 class AnswerAgent:

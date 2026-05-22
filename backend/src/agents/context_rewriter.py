@@ -1,5 +1,5 @@
 from openai import OpenAI
-from agents.schemas import PatientSnapshotSchema
+from .schemas import PatientSnapshotSchema
 
 class ContextRewriterAgent:
     """

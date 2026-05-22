@@ -1,11 +1,11 @@
 import chromadb
 from openai import OpenAI
-from config import settings
-from agents.schemas import FinalAssessmentSchema
-from agents.context_rewriter import ContextRewriterAgent
-from agents.query_agent import QueryAgent
-from agents.relevant_document_agent import RelevantDocumentAgent
-from agents.answer_agent import AnswerAgent
+from ..config import settings
+from .schemas import FinalAssessmentSchema
+from .context_rewriter import ContextRewriterAgent
+from .query_agent import QueryAgent
+from .relevant_document_agent import RelevantDocumentAgent
+from .answer_agent import AnswerAgent
 from chromadb.utils import embedding_functions
 
 MODEL_NAME = "gpt-4o"
