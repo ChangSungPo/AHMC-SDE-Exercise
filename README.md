@@ -1,5 +1,5 @@
 # Multi-Agent Clinical Revision System
-[Live Demo](https://ahmc-sde-exercise-41axlbrhl-po-s-projects3.vercel.app/)
+[Live Demo](https://ahmc-sde-exercise.vercel.app/)
 ---
 
 ## 1. Architecture Overview
