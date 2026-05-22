@@ -3,20 +3,20 @@ import sys
 from openai import OpenAI
 from pathlib import Path
 
-# =====================================================================
-# Path Alignment Layer (Ensures Python can find backend modules)
-# =====================================================================
-CURRENT_SCRIPT = Path(__file__).resolve()
-REPO_ROOT = CURRENT_SCRIPT.parent.parent
-BACKEND_SRC = REPO_ROOT / "backend" / "src"
-AGENTS_DIR = BACKEND_SRC / "agents"
+current_file = Path(__file__).resolve()
+scripts_dir = current_file.parent
+project_root = scripts_dir.parent
 
-sys.path.append(str(BACKEND_SRC))
-sys.path.append(str(AGENTS_DIR))
+# Priority 0: Force Python to look inside scripts/ first for 'config'
+if str(scripts_dir) not in sys.path:
+    sys.path.insert(0, str(scripts_dir))
 
-# Now safely import our validated modules
+# Priority 1: Lower priority fallback for backend system modules access
+if str(project_root) not in sys.path:
+    sys.path.insert(1, str(project_root))
+
 from config import settings
-from context_rewriter import ContextRewriterAgent
+from backend.src.agents.context_rewriter import ContextRewriterAgent
 
 # =====================================================================
 # Mock Chaotic Clinical Input (Extracted directly from your Case A doc)

@@ -1,36 +1,20 @@
 import os
 from pathlib import Path
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from dotenv import load_dotenv
 
-# Locate the project root (navigating up from the backend/src or scripts directory)
-# This ensures python can find the .env file regardless of where the script is executed.
-BASE_DIR = Path(__file__).resolve().parent.parent
-if BASE_DIR.name == "src" or BASE_DIR.name == "scripts":
-    BASE_DIR = BASE_DIR.parent
+current_file = Path(__file__).resolve()
+project_root = current_file.parent.parent
 
-ENV_FILE_PATH = os.path.join(BASE_DIR, ".env")
+root_env_path = project_root / ".env"
 
-class Settings(BaseSettings):
-    """
-    Centralized configuration management class utilizing Pydantic Settings.
-    Automatically loads variables from .env file and performs type validation.
-    """
-    # Required parameters (system will fail-fast on startup if missing)
-    openai_api_key: str = ""
-    
-    # Optional parameters with reliable production defaults
-    embedding_model_name: str = "text-embedding-3-small"
-    chroma_db_path: str = "./vector_db"
-    chroma_collection_name: str = "mcg_diabetes_m130"
-    backend_host: str = "0.0.0.0"
-    backend_port: int = 8000
+load_dotenv(dotenv_path=root_env_path)
 
-    # Configuration for Pydantic to hook into the .env file
-    model_config = SettingsConfigDict(
-        env_file=ENV_FILE_PATH,
-        env_file_encoding="utf-8",
-        extra="ignore" # Safely ignore extra env variables not declared above
-    )
+class ScriptSettings:
+    def __init__(self):
+        # Fetch environment variables injected from the centralized file
+        self.openai_api_key = os.getenv("OPENAI_API_KEY", "")
+        self.chroma_db_path = os.getenv("CHROMA_DB_PATH", "")
+        self.embedding_model_name = os.getenv("EMBEDDING_MODEL_NAME", "")
+        self.chroma_collection_name = os.getenv("CHROMA_COLLECTION_NAME", "")
 
-# Instantiate a global settings object for singleton pattern access across the application
-settings = Settings()
+settings = ScriptSettings()

@@ -1,16 +1,21 @@
 import os
 import sys
 from pathlib import Path
-from head_agent import HeadAgent
 from config import settings
 
-CURRENT_SCRIPT = Path(__file__).resolve()
-REPO_ROOT = CURRENT_SCRIPT.parent.parent
-BACKEND_SRC = REPO_ROOT / "backend" / "src"
-AGENTS_DIR = BACKEND_SRC / "agents"
+current_file = Path(__file__).resolve()
+scripts_dir = current_file.parent
+project_root = scripts_dir.parent
 
-sys.path.append(str(BACKEND_SRC))
-sys.path.append(str(AGENTS_DIR))
+# Priority 0: Force Python to look inside scripts/ first for 'config'
+if str(scripts_dir) not in sys.path:
+    sys.path.insert(0, str(scripts_dir))
+
+# Priority 1: Lower priority fallback for backend system modules access
+if str(project_root) not in sys.path:
+    sys.path.insert(1, str(project_root))
+
+from backend.src.agents.head_agent import HeadAgent
 
 # Note Input
 REALISTIC_CASE_A_INPUT = """
